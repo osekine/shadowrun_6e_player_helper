@@ -11,11 +11,31 @@ dependencies:
     path: packages/shadowrun_6e_player_helper_view_model
   flutter:
     sdk: flutter
+  theme_tailor_annotation: ^3.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  build_runner: ^2.10.4
+  theme_tailor: ^3.1.1
 
 flutter:
   uses-material-design: true
+
+fonts: 
+  - family: Ubuntu Sans
+    fonts:
+      - asset: fonts/Ubuntu-Sans-Regular.ttf
+      - asset: fonts/Ubuntu-Sans-Bold.ttf
+        weight: 400
+      - asset: fonts/Ubuntu-Sans-BoldItalic.ttf
+        weight: 400
+        style: italic
+      - asset: fonts/Ubuntu-Sans-Italic.ttf
+        style: italic
+      - asset: fonts/Ubuntu-Sans-Medium.ttf
+        weight: 200
+      - asset: fonts/Ubuntu-Sans-MediumItalic.ttf
+        weight: 200
+        style: italic

@@ -67,36 +67,4 @@ class AppColors {
 
   static Color green = ColorHSL.fromHSL(161, 100, 13);
   static Color green55 = ColorHSL.fromHSL(156, 68, 43);
-
-  // DARK
-  // static Color bgDark = ColorHSL.fromHSL(250, 100, 5);
-  // static Color bg = ColorHSL.fromHSL(248, 86, 9);
-  // static Color bgLight = ColorHSL.fromHSL(245, 58, 13);
-  // static Color text = ColorHSL.fromHSL(236, 100, 100);
-  // static Color textMuted = ColorHSL.fromHSL(237, 71, 79);
-  // static Color highlight = ColorHSL.fromHSL(242, 40, 52);
-  // static Color border = ColorHSL.fromHSL(245, 47, 40);
-  // static Color borderMuted = ColorHSL.fromHSL(251, 69, 27);
-  // static Color primary = ColorHSL.fromHSL(238, 100, 84);
-  // static Color secondary = ColorHSL.fromHSL(53, 70, 46);
-  // static Color danger = ColorHSL.fromHSL(8, 79, 66);
-  // static Color warning = ColorHSL.fromHSL(54, 100, 31);
-  // static Color success = ColorHSL.fromHSL(156, 68, 43);
-  // static Color info = ColorHSL.fromHSL(217, 94, 69);
-
-  // LIGHT
-  // static Color bgDark = ColorHSL.fromHSL(235, 100, 98);
-  // static Color bg = ColorHSL.fromHSL(235, 100, 100);
-  // static Color bgLight = ColorHSL.fromHSL(235, 100, 100);
-  // static Color text = ColorHSL.fromHSL(263, 100, 10);
-  // static Color textMuted = ColorHSL.fromHSL(245, 47, 40);
-  // static Color highlight = ColorHSL.fromHSL(237, 100, 100);
-  // static Color border = ColorHSL.fromHSL(240, 55, 64);
-  // static Color borderMuted = ColorHSL.fromHSL(239, 89, 77);
-  // static Color primary = ColorHSL.fromHSL(245, 47, 40);
-  // static Color secondary = ColorHSL.fromHSL(51, 100, 9);
-  // static Color danger = ColorHSL.fromHSL(6, 60, 41);
-  // static Color warning = ColorHSL.fromHSL(52, 100, 14);
-  // static Color success = ColorHSL.fromHSL(161, 100, 13);
-  // static Color info = ColorHSL.fromHSL(217, 62, 44);
 }
