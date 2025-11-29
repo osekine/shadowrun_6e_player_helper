@@ -20,17 +20,26 @@ class ItemCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 200, child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: const Placeholder(),
-            )),
+            SizedBox(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: const Placeholder(),
+              ),
+            ),
             Text(vm.name, style: context.appTheme.header),
             for (int i = 0; i < vm.properties.length; ++i) ...[
               Container(
                 color: i % 2 == 1
                     ? context.appTheme.backgroundLight
                     : context.appTheme.backgroundDark,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding: EdgeInsets.fromLTRB(
+                  16,
+                  4,
+                  16,
+                  // play around
+                  i == vm.properties.length - 1 ? 8 : 4,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
