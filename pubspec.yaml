@@ -7,6 +7,8 @@ environment:
   sdk: ^3.10.0
 
 dependencies:
+  shadowrun_6e_player_helper_view_model:
+    path: packages/shadowrun_6e_player_helper_view_model
   flutter:
     sdk: flutter
 

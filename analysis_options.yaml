@@ -1,1 +1,18 @@
 include: package:flutter_lints/flutter.yaml
+rules:
+        # Enforce use of `const` constructors for all classes that are immutable or have no mutable state
+    - name: s1026
+      excludes: ['lib/main.dart']
+
+      # Ensure that unused imports are removed to reduce the size and complexity of your codebase
+    - name: unused_import
+      exclude: 'dev_dependencies'
+
+      # Enforce usage of `const` constructors for all classes that have no mutable state or are immutable.
+    - name: const_constructors
+
+      # Ensure that each widget has a unique key to prevent rebuilds when the underlying data doesn’t change, improving performance and reducing unnecessary UI updates.
+    - name: prefer_key
+
+      # Enforce using `const` constructors for all classes with no mutable state or immutable objects. This helps reduce memory usage by avoiding creating new instances of these objects at runtime.
+    - name: const_classes
