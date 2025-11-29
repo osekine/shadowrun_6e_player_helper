@@ -17,8 +17,8 @@ class ItemCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             SizedBox(
               height: 200,
@@ -27,7 +27,7 @@ class ItemCard extends StatelessWidget {
                 child: const Placeholder(),
               ),
             ),
-            Text(vm.name, style: context.appTheme.header),
+            Text(vm.name, style: context.appTheme.header, textAlign: TextAlign.center,),
             for (int i = 0; i < vm.properties.length; ++i) ...[
               Container(
                 color: i % 2 == 1

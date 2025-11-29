@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
-import 'package:shadowrun_6e_player_helper/view/features/items/item_carousel.dart';
-import 'package:shadowrun_6e_player_helper/view/features/items/item_category_widget.dart';
+
+import 'view/features/items/item_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -32,7 +32,7 @@ class _MainAppState extends State<MainApp> {
         builder: (context) {
           return Scaffold(
             backgroundColor: context.appTheme.background,
-            body: ItemCategoryWidget(),
+            body: ItemPage(),
             floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
           );
         },
