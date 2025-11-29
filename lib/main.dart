@@ -15,7 +15,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  bool isLightTheme = false;
+  bool isLightTheme = true;
 
   void _toggleTheme() {
     isLightTheme = !isLightTheme;
@@ -28,9 +28,14 @@ class _MainAppState extends State<MainApp> {
       theme: isLightTheme
           ? ThemeData.light().copyWith(extensions: [lightAppTheme])
           : ThemeData.dark().copyWith(extensions: [darkAppTheme]),
-      home: Scaffold(
-        body: Center(child: ItemCard(vm: defaultItem)),
-        floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
+      home: Builder(
+        builder: (context) {
+          return Scaffold(
+            backgroundColor: context.appTheme.background,
+            body: Center(child: ItemCard(vm: defaultItem)),
+            floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
+          );
+        },
       ),
     );
   }

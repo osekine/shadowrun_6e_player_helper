@@ -72,9 +72,9 @@ class AppTheme extends ThemeExtension<AppTheme> with _$AppThemeTailorMixin {
 }
 
 final lightAppTheme = AppTheme(
-  background: AppColors.white2,
-  backgroundLight: AppColors.white,
-  backgroundDark: AppColors.white4,
+  background: AppColors.white5,
+  backgroundLight: AppColors.white2,
+  backgroundDark: AppColors.white10,
   text: AppColors.blue90,
   textMuted: AppColors.blue60,
   highlight: AppColors.white,
@@ -115,7 +115,7 @@ final lightAppTheme = AppTheme(
 );
 
 final darkAppTheme = AppTheme(
-  background: AppColors.black,
+  background: AppColors.black10,
   backgroundLight: AppColors.black15,
   backgroundDark: AppColors.black,
   text: AppColors.white2,

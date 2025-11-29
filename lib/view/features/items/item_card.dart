@@ -11,7 +11,7 @@ class ItemCard extends StatelessWidget {
     return Container(
       width: 300,
       decoration: BoxDecoration(
-        color: context.appTheme.background,
+        color: context.appTheme.backgroundLight,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: context.appTheme.border),
       ),
@@ -28,7 +28,7 @@ class ItemCard extends StatelessWidget {
             for (int i = 0; i < vm.properties.length; ++i) ...[
               Container(
                 color: i % 2 == 1
-                    ? context.appTheme.background
+                    ? context.appTheme.backgroundLight
                     : context.appTheme.backgroundDark,
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 child: Row(

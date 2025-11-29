@@ -39,12 +39,14 @@ abstract class ColorHSL {
 class AppColors {
   static Color white = ColorHSL.fromHSL(235, 100, 100);
   static Color white2 = ColorHSL.fromHSL(235, 100, 98);
-  static Color white4 = ColorHSL.fromHSL(235, 100, 96);
-  static Color white20 = ColorHSL.fromHSL(237, 71, 79);
+  static Color white5 = ColorHSL.fromHSL(235, 90, 96);
+  static Color white10 = ColorHSL.fromHSL(235, 90, 90);
+  static Color white20 = ColorHSL.fromHSL(237, 80, 79);
 
   static Color black = ColorHSL.fromHSL(250, 100, 5);
   static Color black10 = ColorHSL.fromHSL(248, 86, 9);
-  static Color black15 = ColorHSL.fromHSL(245, 58, 13);
+  static Color black15 = ColorHSL.fromHSL(245, 80, 13);
+  static Color black20 = ColorHSL.fromHSL(245, 60, 20);
 
   static Color cyan = ColorHSL.fromHSL(217, 94, 69);
   static Color cyan65 = ColorHSL.fromHSL(217, 62, 44);
