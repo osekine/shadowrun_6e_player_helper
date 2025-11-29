@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
 
 import 'item_card.dart';
@@ -26,13 +27,18 @@ class _ItemCarouselState extends State<ItemCarousel> {
   Widget build(BuildContext context) {
     final amount = _testList.length;
 
-    return CustomScrollView(
-      controller: _controller,
-      scrollDirection: Axis.horizontal,
-      slivers: [
-        SliverList(delegate: _ItemCarouselDelegate(children: _testList)),
-      ],
+    return SizedBox(
+      height: _calcHeight(),
+      child: ListView.custom(
+        scrollDirection: Axis.horizontal,
+        childrenDelegate: _ItemCarouselDelegate(children: _testList),
+      ),
     );
+  }
+
+  double _calcHeight() {
+    // TODO(NLU): add dynamic height calculation
+    return 380;
   }
 }
 
@@ -46,7 +52,7 @@ class _ItemCarouselDelegate extends SliverChildDelegate {
     if (index == children.length) return null;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Center(child: ItemCard(vm: children[index])),
+      child: ItemCard(vm: children[index]),
     );
   }
 
