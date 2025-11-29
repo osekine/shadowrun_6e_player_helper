@@ -16,3 +16,5 @@ const _testProperties = {
   "DMG": "4S",
   "Mode": "SS/SA",
 };
+
+const defaultItem = ItemViewModel(name: 'Default');
