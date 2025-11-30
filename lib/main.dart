@@ -1,19 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+
+import 'view/features/items/item_page.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  bool isLightTheme = true;
+
+  void _toggleTheme() {
+    isLightTheme = !isLightTheme;
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      theme: isLightTheme
+          ? ThemeData.light().copyWith(extensions: [lightAppTheme])
+          : ThemeData.dark().copyWith(extensions: [darkAppTheme]),
+      home: Builder(
+        builder: (context) {
+          return Scaffold(
+            backgroundColor: context.appTheme.background,
+            body: ItemPage(),
+            floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
+          );
+        },
       ),
     );
   }

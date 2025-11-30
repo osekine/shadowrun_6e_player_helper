@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shadowrun_6e_player_helper/utils/app_colors.dart';
+import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
 import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
 
 class ItemCard extends StatelessWidget {
@@ -7,6 +9,73 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      width: 300,
+      decoration: BoxDecoration(
+        color: context.appTheme.backgroundLight,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: context.appTheme.border),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 3),
+            color: AppColors.black,
+            blurRadius: 3,
+          ),
+          BoxShadow(
+            offset: Offset(0, 5),
+            color: AppColors.black20,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: [
+            SizedBox(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: const Placeholder(),
+              ),
+            ),
+            Text(
+              vm.name,
+              style: context.appTheme.header,
+              textAlign: TextAlign.center,
+            ),
+            for (int i = 0; i < vm.properties.length; ++i) ...[
+              Container(
+                color: i % 2 == 1
+                    ? context.appTheme.backgroundLight
+                    : context.appTheme.backgroundDark,
+                padding: EdgeInsets.fromLTRB(
+                  16,
+                  4,
+                  16,
+                  // play around
+                  i == vm.properties.length - 1 ? 8 : 4,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      vm.properties.entries.elementAt(i).key,
+                      style: context.appTheme.description,
+                    ),
+                    Text(
+                      vm.properties.entries.elementAt(i).value,
+                      style: context.appTheme.body,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 }
