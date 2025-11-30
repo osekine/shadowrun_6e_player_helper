@@ -11,60 +11,36 @@ class ItemCategoryWidget extends StatefulWidget {
 
 class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
     with AutomaticKeepAliveClientMixin {
-  bool _isListVisible = false;
-  final a = ValueNotifier<Tween<double>>(Tween<double>(begin: 400.0, end: 0));
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        GestureDetector(
-          onTapUp: (_) => _changeListVisibility(),
-          child: Container(
+    super.build(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
             height: 50,
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              // color: context.appTheme.background,
               border: BoxBorder.fromLTRB(
-                top: BorderSide(width: 1, color: context.appTheme.border),
-                bottom: BorderSide(width: 5, color: context.appTheme.border),
+                top: BorderSide(width: 2, color: context.appTheme.borderMuted),
               ),
             ),
-            child: Text('Category', style: context.appTheme.header),
+            child: Text(
+              'Category',
+              style: context.appTheme.header.copyWith(letterSpacing: 0.4),
+            ),
           ),
-        ),
-        ValueListenableBuilder(
-          valueListenable: a,
-          builder: (context, tween, _) {
-            return TweenAnimationBuilder(
-              tween: tween,
-              builder: (context, value, child) {
-                return SizedBox(
-                  height: value,
-                  child: OverflowBox(
-                    child: value > 0 ? child : const SizedBox.shrink(),
-                  ),
-                );
-              },
-              duration: const Duration(milliseconds: 100),
-              child: ItemCarousel(),
-            );
-          },
-        ),
-      ],
+          const SizedBox(height: 4),
+          ItemCarousel(),
+          const SizedBox(height: 4),
+        ],
+      ),
     );
   }
 
-  void _changeListVisibility() {
-    a.value = Tween<double>(begin: a.value.end, end: a.value.begin);
-    _isListVisible = !_isListVisible;
-    updateKeepAlive();
-  }
-
   @override
-  bool get wantKeepAlive => _isListVisible;
+  bool get wantKeepAlive => true;
 }
-
-// class _ItemCategoryDelegate extends MultiChildLayoutDelegate {}
