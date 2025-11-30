@@ -38,7 +38,7 @@ class _ItemCarouselState extends State<ItemCarousel> {
 
   double _calcHeight() {
     // TODO(NLU): add dynamic height calculation
-    return 380;
+    return 400;
   }
 }
 
@@ -51,7 +51,7 @@ class _ItemCarouselDelegate extends SliverChildDelegate {
   Widget? build(BuildContext context, int index) {
     if (index == children.length) return null;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(16,8,16,24),
       child: ItemCard(vm: children[index]),
     );
   }
