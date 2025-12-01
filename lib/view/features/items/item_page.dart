@@ -15,7 +15,7 @@ class ItemPage extends StatelessWidget {
         final category = vm.categories[index];
 
         return ItemCategoryWidget(
-          categoryName: category.name,
+          category: category,
           items: vm.items(category: category),
         );
       },

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+import 'package:shadowrun_6e_player_helper/view/features/items/add_item_page.dart';
 import 'package:shadowrun_6e_player_helper/view/features/items/item_carousel.dart';
 import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
 
 class ItemCategoryWidget extends StatefulWidget {
-  final String categoryName;
+  final ICategoryViewModel category;
   final List<IItemViewModel> items;
   const ItemCategoryWidget({
     super.key,
-    required this.categoryName,
+    required this.category,
     required this.items,
   });
 
@@ -39,12 +40,18 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.categoryName,
+                  widget.category.name,
                   style: context.appTheme.header.copyWith(letterSpacing: 0.4),
                 ),
                 InkWell(
-                  onTap: (){},
-                  child: Icon(Icons.add, color: context.appTheme.textMuted, size: 28,),
+                  onTap: () {
+                    AddItemPage.showAsBottomSheet(context, widget.category);
+                  },
+                  child: Icon(
+                    Icons.add,
+                    color: context.appTheme.textMuted,
+                    size: 28,
+                  ),
                 ),
               ],
             ),
