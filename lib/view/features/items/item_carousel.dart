@@ -3,8 +3,6 @@ import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper
 
 import 'item_card.dart';
 
-final _testList = [defaultWeapon, defaultWeapon, defaultWeapon];
-
 class ItemCarousel extends StatefulWidget {
   final List<IItemViewModel> items;
   const ItemCarousel({super.key, required this.items});
@@ -25,8 +23,6 @@ class _ItemCarouselState extends State<ItemCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final amount = _testList.length;
-
     return SizedBox(
       height: _calcHeight(),
       child: ListView.custom(

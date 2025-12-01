@@ -35,9 +35,18 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
                 top: BorderSide(width: 2, color: context.appTheme.borderMuted),
               ),
             ),
-            child: Text(
-              widget.categoryName,
-              style: context.appTheme.header.copyWith(letterSpacing: 0.4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.categoryName,
+                  style: context.appTheme.header.copyWith(letterSpacing: 0.4),
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: Icon(Icons.add, color: context.appTheme.textMuted, size: 28,),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 4),
