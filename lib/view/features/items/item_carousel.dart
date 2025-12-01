@@ -3,10 +3,11 @@ import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper
 
 import 'item_card.dart';
 
-final _testList = [defaultItem, defaultItem, defaultItem];
+final _testList = [defaultWeapon, defaultWeapon, defaultWeapon];
 
 class ItemCarousel extends StatefulWidget {
-  const ItemCarousel({super.key});
+  final List<IItemViewModel> items;
+  const ItemCarousel({super.key, required this.items});
 
   @override
   State<ItemCarousel> createState() => _ItemCarouselState();
@@ -30,7 +31,7 @@ class _ItemCarouselState extends State<ItemCarousel> {
       height: _calcHeight(),
       child: ListView.custom(
         scrollDirection: Axis.horizontal,
-        childrenDelegate: _ItemCarouselDelegate(children: _testList),
+        childrenDelegate: _ItemCarouselDelegate(children: widget.items),
       ),
     );
   }
@@ -50,7 +51,7 @@ class _ItemCarouselDelegate extends SliverChildDelegate {
   Widget? build(BuildContext context, int index) {
     if (index == children.length) return null;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16,8,16,24),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
       child: ItemCard(vm: children[index]),
     );
   }

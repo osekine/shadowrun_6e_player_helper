@@ -23,7 +23,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i677.IEquipmentViewModel>(
-      () => const _i534.EquipmentViewModel()..init(),
+      () => _i534.EquipmentViewModel()..init(),
     );
     return this;
   }

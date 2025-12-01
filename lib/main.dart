@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/di/injection.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+import 'package:shadowrun_6e_player_helper_view_model/di/injection.dart';
+import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
 
 
 import 'view/features/items/item_page.dart';
@@ -36,7 +38,7 @@ class _MainAppState extends State<MainApp> {
         builder: (context) {
           return Scaffold(
             backgroundColor: context.appTheme.background,
-            body: ItemPage(),
+            body: ItemPage(vm: getIt<IEquipmentViewModel>()),
             floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
           );
         },

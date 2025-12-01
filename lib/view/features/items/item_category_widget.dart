@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
 import 'package:shadowrun_6e_player_helper/view/features/items/item_carousel.dart';
+import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
 
 class ItemCategoryWidget extends StatefulWidget {
-  const ItemCategoryWidget({super.key});
+  final String categoryName;
+  final List<IItemViewModel> items;
+  const ItemCategoryWidget({
+    super.key,
+    required this.categoryName,
+    required this.items,
+  });
 
   @override
   State<ItemCategoryWidget> createState() => _ItemCategoryWidgetState();
@@ -29,12 +36,12 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
               ),
             ),
             child: Text(
-              'Category',
+              widget.categoryName,
               style: context.appTheme.header.copyWith(letterSpacing: 0.4),
             ),
           ),
           const SizedBox(height: 4),
-          ItemCarousel(),
+          ItemCarousel(items: widget.items),
           const SizedBox(height: 4),
         ],
       ),

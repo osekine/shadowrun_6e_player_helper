@@ -5,10 +5,10 @@ import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper
 
 @Injectable(as: IEquipmentViewModel)
 class EquipmentViewModel implements IEquipmentViewModel {
-  final Map<ICategoryViewModel, Set<IItemViewModel>> _allItems =
-      const <ICategoryViewModel, Set<IItemViewModel>>{};
+  final Map<ICategoryViewModel, List<IItemViewModel>> _allItems =
+      <ICategoryViewModel, List<IItemViewModel>>{};
 
-  const EquipmentViewModel();
+  EquipmentViewModel();
 
   @postConstruct
   void init() {
@@ -29,7 +29,7 @@ class EquipmentViewModel implements IEquipmentViewModel {
       return;
     }
 
-    _allItems[item.category] = {item};
+    _allItems[item.category] = [item];
   }
 
   @override
@@ -37,6 +37,6 @@ class EquipmentViewModel implements IEquipmentViewModel {
 
   @override
   List<IItemViewModel> items({required ICategoryViewModel category}) {
-    return _allItems[category]?.toList() ?? [];
+    return _allItems[category] ?? [];
   }
 }
