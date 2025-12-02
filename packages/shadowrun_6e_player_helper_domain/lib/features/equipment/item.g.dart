@@ -9,13 +9,17 @@ part of 'item.dart';
 _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
   name: json['name'] as String,
   category: $enumDecode(_$CategoryEnumMap, json['category']),
-  peoperties: Map<String, String>.from(json['peoperties'] as Map),
+  properties: Map<String, String>.from(json['properties'] as Map),
+  attachments: (json['attachments'] as List<dynamic>)
+      .map((e) => Attachment.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{
   'name': instance.name,
   'category': _$CategoryEnumMap[instance.category]!,
-  'peoperties': instance.peoperties,
+  'properties': instance.properties,
+  'attachments': instance.attachments,
 };
 
 const _$CategoryEnumMap = {
