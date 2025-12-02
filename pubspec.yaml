@@ -9,9 +9,13 @@ environment:
 dependencies:
   shadowrun_6e_player_helper_view_model:
     path: packages/shadowrun_6e_player_helper_view_model
+  shadowrun_6e_player_helper_data:
+    path: packages/shadowrun_6e_player_helper_data
   flutter:
     sdk: flutter
   theme_tailor_annotation: ^3.1.1
+  injectable: ^2.7.0
+  get_it: ^9.1.1
 
 dev_dependencies:
   flutter_test:
@@ -19,10 +23,12 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   build_runner: ^2.10.4
   theme_tailor: ^3.1.1
+  injectable_generator: ^2.9.1
 
 flutter:
   uses-material-design: true
-
+  assets:
+    - assets/shadowrun.db
 fonts: 
   - family: Ubuntu Sans
     fonts:

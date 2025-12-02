@@ -1,0 +1,85 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "shadowrun_6e_player_helper",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shadowrun_6e_player_helper (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "shadowrun_6e_player_helper (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_data",
+            "cwd": "packages/shadowrun_6e_player_helper_data",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_data (profile mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_data",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_data (release mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_data",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_domain",
+            "cwd": "packages/shadowrun_6e_player_helper_domain",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_domain (profile mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_domain",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_domain (release mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_domain",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_view_model",
+            "cwd": "packages/shadowrun_6e_player_helper_view_model",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_view_model (profile mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_view_model",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "shadowrun_6e_player_helper_view_model (release mode)",
+            "cwd": "packages/shadowrun_6e_player_helper_view_model",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
