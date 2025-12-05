@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shadowrun_6e_player_helper/di/injection.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+
 
 import 'view/features/items/item_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MainApp());
 }
 
