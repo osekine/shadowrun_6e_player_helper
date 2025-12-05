@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:injectable/injectable.dart';
 import 'package:shadowrun_6e_player_helper_data/service/i_data_service.dart';
 import 'package:shadowrun_6e_player_helper_domain/features/equipment/category.dart';
@@ -5,14 +6,12 @@ import 'package:shadowrun_6e_player_helper_domain/features/equipment/category.da
 import 'package:shadowrun_6e_player_helper_domain/features/equipment/item.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'i_repository.dart';
+import 'i_item_repository.dart';
 
 @Injectable(as: IItemRepository)
 class ItemRepository implements IItemRepository {
   late final Database _database;
   final IDataService _dataService;
-  @override
-  void addItem(Item item) {}
 
   @override
   Future<List<Item>> getAllItems() async {
@@ -30,10 +29,16 @@ class ItemRepository implements IItemRepository {
 
   @override
   Future<List<Item>> getItemsByCategory(Category category) async {
-    final json = await _database.query('');
+    late final List<Map<String, dynamic>> json;
+    try {
+      json = await _database.query(category.name);
+    } on Exception catch (e) {
+      debugPrint('Error in get items for category ${category.name} :: $e');
+      return [];
+    }
 
-    // TODO(NLU) prepare json
-    final preparedJson = [];
+    // TODO(NLU): need mapping
+    final preparedJson = json;
     final items = <Item>[];
     for (var item in preparedJson) {
       items.add(Item.fromJson(item));
@@ -47,9 +52,9 @@ class ItemRepository implements IItemRepository {
 
   @postConstruct
   Future<void> init() async {
-    _database = await _dataService.getDatabase(databaseId);
+    _database = await _dataService.getDatabase(databaseId, readOnly: true);
   }
 
   @override
-  String get databaseId => 'item';
+  String get databaseId => 'items';
 }
