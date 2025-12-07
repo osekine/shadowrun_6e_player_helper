@@ -1,35 +1,37 @@
+import 'package:shadowrun_6e_player_helper_domain/domain.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_category_view_model.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_item_view_model.dart';
 
 import 'category_view_model.dart';
 
 class ItemViewModel implements IItemViewModel {
+  final Item _item;
   @override
-  final String name;
+  String get name => _item.name;
 
   @override
-  final Map<String, String> properties;
+  Map<String, String?> get properties => _item.properties;
 
-  const ItemViewModel({required this.name, required this.category})
-    : properties = _testProperties;
+  ItemViewModel({required Item item}) : _item = item {
+    category = CategoryViewModel(category: item.category);
+  }
 
-  // TODO(NLU): remove when add correct logic
   @override
-  final ICategoryViewModel category;
+  late final ICategoryViewModel category;
 }
 
-const _testProperties = {
-  "Type": "Pistol",
-  "ATK": "2/10/3/-/-",
-  "DMG": "4S",
-  "Mode": "SS/SA",
-};
+// const _testProperties = {
+//   "Type": "Pistol",
+//   "ATK": "2/10/3/-/-",
+//   "DMG": "4S",
+//   "Mode": "SS/SA",
+// };
 
-const defaultWeapon = ItemViewModel(
-  name: 'Default Weapon',
-  category: CategoryViewModel(name: 'weapon'),
-);
-const defaultArmor = ItemViewModel(
-  name: 'Default Armor',
-  category: CategoryViewModel(name: 'armor'),
-);
+// const defaultWeapon = ItemViewModel(
+//   name: 'Default Weapon',
+//   category: CategoryViewModel(name: 'weapon'),
+// );
+// const defaultArmor = ItemViewModel(
+//   name: 'Default Armor',
+//   category: CategoryViewModel(name: 'armor'),
+// );

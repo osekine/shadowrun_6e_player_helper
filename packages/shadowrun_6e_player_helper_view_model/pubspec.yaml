@@ -1,7 +1,7 @@
 name: shadowrun_6e_player_helper_view_model
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: ^3.10.0
@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   get_it: ^9.1.1
   injectable: ^2.7.0
+  shadowrun_6e_player_helper_data:
+    path: ../shadowrun_6e_player_helper_data
+  shadowrun_6e_player_helper_domain:
+    path: ../shadowrun_6e_player_helper_domain
 
 dev_dependencies:
   flutter_test:

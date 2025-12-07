@@ -9,11 +9,10 @@ import 'package:sqflite/sqflite.dart';
 
 @Injectable(as: IDataService)
 class DataService implements IDataService {
-  late final String databasePath;
+  String? databasePath;
 
   @postConstruct
-  void init() async {
-    databasePath = await getDatabasesPath();
+  void init() {
   }
 
   @override
@@ -24,11 +23,15 @@ class DataService implements IDataService {
 
   @override
   Future<Database> getDatabase(String name, {bool readOnly = false}) async {
-    final path = '$databasePath/$name';
+    databasePath ??= await getDatabasesPath();
+
+    name = '$name.db';
+    // final path = '$databasePath/$name';
+    final path = '$databasePath/shadowrun.db';
     final exists = await databaseExists(path);
 
     if (!exists) {
-      _addDatabaseFromAsset(name);
+      await _addDatabaseFromAsset(name);
     } else {
       debugPrint("Opening existing database");
     }
@@ -41,6 +44,8 @@ class DataService implements IDataService {
   Future<void> updateDatabase(String name) async {}
 
   Future<void> _addDatabaseFromAsset(String name) async {
+    databasePath ??= await getDatabasesPath();
+
     final path = '$databasePath/$name';
     debugPrint("Creating new copy from asset");
 
@@ -49,7 +54,7 @@ class DataService implements IDataService {
     } catch (_) {}
 
     // Copy from asset
-    ByteData data = await rootBundle.load(url.join("assets", name));
+    ByteData data = await rootBundle.load(url.join('assets', name));
     List<int> bytes = data.buffer.asUint8List(
       data.offsetInBytes,
       data.lengthInBytes,

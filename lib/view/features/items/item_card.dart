@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_colors.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
-import 'package:shadowrun_6e_player_helper_view_model/shadowrun_6e_player_helper_view_model.dart';
+import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemCard extends StatelessWidget {
   final IItemViewModel vm;
@@ -66,7 +66,7 @@ class ItemCard extends StatelessWidget {
                       style: context.appTheme.description,
                     ),
                     Text(
-                      vm.properties.entries.elementAt(i).value,
+                      vm.properties.entries.elementAt(i).value ?? '-',
                       style: context.appTheme.body,
                     ),
                   ],

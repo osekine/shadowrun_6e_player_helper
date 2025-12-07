@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:injectable/injectable.dart';
 import 'package:shadowrun_6e_player_helper_data/service/i_data_service.dart';
@@ -10,16 +12,22 @@ import 'i_item_repository.dart';
 
 @Injectable(as: IItemRepository)
 class ItemRepository implements IItemRepository {
-  late final Database _database;
+  Database? _database;
   final IDataService _dataService;
 
   @override
   Future<List<Item>> getAllItems() async {
-    final json = await _database.query('');
+    await _initDatabase();
 
-    // TODO(NLU) prepare json
-    final preparedJson = [];
+    final database = _database;
+    if (database == null) return [];
+
+    // TODO(NLU): delete workarounds
+    final table = 'weapons';
+    final json = await database.query(table);
+
     final items = <Item>[];
+    final preparedJson = _prepareJson(json);
     for (var item in preparedJson) {
       items.add(Item.fromJson(item));
     }
@@ -29,16 +37,20 @@ class ItemRepository implements IItemRepository {
 
   @override
   Future<List<Item>> getItemsByCategory(Category category) async {
+    await _initDatabase();
+
+    final database = _database;
+    if (database == null) return [];
+
     late final List<Map<String, dynamic>> json;
     try {
-      json = await _database.query(category.name);
+      json = await database.query('${category.name}s');
     } on Exception catch (e) {
       debugPrint('Error in get items for category ${category.name} :: $e');
       return [];
     }
 
-    // TODO(NLU): need mapping
-    final preparedJson = json;
+    final preparedJson = _prepareJson(json);
     final items = <Item>[];
     for (var item in preparedJson) {
       items.add(Item.fromJson(item));
@@ -50,11 +62,32 @@ class ItemRepository implements IItemRepository {
   ItemRepository({required IDataService dataService})
     : _dataService = dataService;
 
-  @postConstruct
-  Future<void> init() async {
-    _database = await _dataService.getDatabase(databaseId, readOnly: true);
-  }
-
   @override
   String get databaseId => 'items';
+
+  Future<void> _initDatabase() async {
+    _database ??= await _dataService.getDatabase(databaseId, readOnly: true);
+  }
+
+  List<Map<String, Object?>> _prepareJson(
+    List<Map<String, Object?>> jsonFromDatabase,
+  ) => jsonFromDatabase
+      .map((e) {
+        return Map.fromEntries(e.entries);
+      })
+      .map(
+        (e) => {
+          'id': e['id'],
+          'category': '${e['equipment_category']}'.toLowerCase(),
+          'name': e['name'],
+          'properties': {
+            for (var i in e.keys.where(
+              (key) =>
+                  key != 'id' && key != 'name' && key != 'equipment_category',
+            ))
+              i: e[i],
+          },
+        },
+      )
+      .toList();
 }

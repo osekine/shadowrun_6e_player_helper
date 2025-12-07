@@ -9,10 +9,12 @@ part of 'item.dart';
 _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
   name: json['name'] as String,
   category: $enumDecode(_$CategoryEnumMap, json['category']),
-  properties: Map<String, String>.from(json['properties'] as Map),
-  attachments: (json['attachments'] as List<dynamic>)
-      .map((e) => Attachment.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  properties: Map<String, String?>.from(json['properties'] as Map),
+  attachments:
+      (json['attachments'] as List<dynamic>?)
+          ?.map((e) => Attachment.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{

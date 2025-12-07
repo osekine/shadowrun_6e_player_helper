@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Item {
 
- String get name; Category get category; Map<String, String> get properties; List<Attachment> get attachments;
+ String get name; Category get category; Map<String, String?> get properties; List<Attachment> get attachments;
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ItemCopyWith<$Res>  {
   factory $ItemCopyWith(Item value, $Res Function(Item) _then) = _$ItemCopyWithImpl;
 @useResult
 $Res call({
- String name, Category category, Map<String, String> properties, List<Attachment> attachments
+ String name, Category category, Map<String, String?> properties, List<Attachment> attachments
 });
 
 
@@ -70,7 +70,7 @@ class _$ItemCopyWithImpl<$Res>
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category,properties: null == properties ? _self.properties : properties // ignore: cast_nullable_to_non_nullable
-as Map<String, String>,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
+as Map<String, String?>,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<Attachment>,
   ));
 }
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String> properties,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
 return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
@@ -177,7 +177,7 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String> properties,  List<Attachment> attachments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)  $default,) {final _that = this;
 switch (_that) {
 case _Item():
 return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
@@ -197,7 +197,7 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  Category category,  Map<String, String> properties,  List<Attachment> attachments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
 return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
@@ -212,20 +212,20 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 @JsonSerializable()
 
 class _Item implements Item {
-  const _Item({required this.name, required this.category, required final  Map<String, String> properties, required final  List<Attachment> attachments}): _properties = properties,_attachments = attachments;
+  const _Item({required this.name, required this.category, required final  Map<String, String?> properties, final  List<Attachment> attachments = const []}): _properties = properties,_attachments = attachments;
   factory _Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 
 @override final  String name;
 @override final  Category category;
- final  Map<String, String> _properties;
-@override Map<String, String> get properties {
+ final  Map<String, String?> _properties;
+@override Map<String, String?> get properties {
   if (_properties is EqualUnmodifiableMapView) return _properties;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_properties);
 }
 
  final  List<Attachment> _attachments;
-@override List<Attachment> get attachments {
+@override@JsonKey() List<Attachment> get attachments {
   if (_attachments is EqualUnmodifiableListView) return _attachments;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_attachments);
@@ -265,7 +265,7 @@ abstract mixin class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   factory _$ItemCopyWith(_Item value, $Res Function(_Item) _then) = __$ItemCopyWithImpl;
 @override @useResult
 $Res call({
- String name, Category category, Map<String, String> properties, List<Attachment> attachments
+ String name, Category category, Map<String, String?> properties, List<Attachment> attachments
 });
 
 
@@ -287,7 +287,7 @@ class __$ItemCopyWithImpl<$Res>
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category,properties: null == properties ? _self._properties : properties // ignore: cast_nullable_to_non_nullable
-as Map<String, String>,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
+as Map<String, String?>,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<Attachment>,
   ));
 }

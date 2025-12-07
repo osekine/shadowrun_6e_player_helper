@@ -11,8 +11,9 @@ abstract class Item with _$Item {
   const factory Item({
     required String name,
     required Category category,
-    required Map<String, String> properties,
-    required List<Attachment> attachments,
+    required Map<String, String?> properties,
+    @Default([])
+    List<Attachment> attachments,
   }) = _Item;
 
   factory Item.fromJson(Map<String,dynamic> json) => _$ItemFromJson(json);
