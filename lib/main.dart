@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/di/injection.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
-import 'package:shadowrun_6e_player_helper/view/features/items/add_item_page.dart';
+import 'package:shadowrun_6e_player_helper/view/features/add_items/add_item_page.dart';
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
-import 'view/features/items/item_page.dart';
+import 'view/features/show_items/item_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -27,7 +27,7 @@ class ItemRepository implements IItemRepository {
     final json = await database.query(table);
 
     final items = <Item>[];
-    final preparedJson = _prepareJson(json);
+    final preparedJson = _prepareJson(json, Category.weapon);
     for (var item in preparedJson) {
       items.add(Item.fromJson(item));
     }
@@ -50,7 +50,7 @@ class ItemRepository implements IItemRepository {
       return [];
     }
 
-    final preparedJson = _prepareJson(json);
+    final preparedJson = _prepareJson(json, category);
     final items = <Item>[];
     for (var item in preparedJson) {
       items.add(Item.fromJson(item));
@@ -71,6 +71,7 @@ class ItemRepository implements IItemRepository {
 
   List<Map<String, Object?>> _prepareJson(
     List<Map<String, Object?>> jsonFromDatabase,
+    Category category,
   ) => jsonFromDatabase
       .map((e) {
         return Map.fromEntries(e.entries);
@@ -78,14 +79,17 @@ class ItemRepository implements IItemRepository {
       .map(
         (e) => {
           'id': e['id'],
-          'category': '${e['equipment_category']}'.toLowerCase(),
+          'category': category.name.toLowerCase(),
           'name': e['name'],
           'properties': {
-            for (var i in e.keys.where(
-              (key) =>
-                  key != 'id' && key != 'name' && key != 'equipment_category',
+            for (var i in e.entries.where(
+              (entry) =>
+                  entry.key != 'id' &&
+                  entry.key != 'name' &&
+                  entry.key != 'equipment_category' &&
+                  entry.value != null,
             ))
-              i: e[i],
+              i.key: '${i.value}',
           },
         },
       )

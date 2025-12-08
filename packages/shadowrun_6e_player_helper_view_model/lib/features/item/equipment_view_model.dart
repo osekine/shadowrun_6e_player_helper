@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 import 'package:shadowrun_6e_player_helper_data/data.dart';
+import 'package:shadowrun_6e_player_helper_domain/domain.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_category_view_model.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_equipment_view_model.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_item_view_model.dart';
@@ -20,7 +21,9 @@ class EquipmentViewModel implements IEquipmentViewModel {
 
   @postConstruct
   Future<void> init() async {
-    final a = await _itemRepository.getAllItems();
+    final weapons = await _itemRepository.getItemsByCategory(Category.weapon);
+    final armors = await _itemRepository.getItemsByCategory(Category.armor);
+    final a = [...weapons, ...armors];
     for (var b in a) {
       final cat = CategoryViewModel(category: b.category);
       if (_allItems.containsKey(cat)) {
@@ -29,7 +32,6 @@ class EquipmentViewModel implements IEquipmentViewModel {
         _allItems[cat] = [ItemViewModel(item: b)];
       }
     }
-    print(_allItems.keys);
   }
 
   @override
@@ -45,7 +47,11 @@ class EquipmentViewModel implements IEquipmentViewModel {
   }
 
   @override
-  List<ICategoryViewModel> get categories => _allItems.keys.toList();
+  List<ICategoryViewModel> get categories => const [
+    CategoryViewModel(category: Category.weapon),
+    CategoryViewModel(category: Category.armor),
+  ];
+  //_allItems.keys.toList();
 
   @override
   List<IItemViewModel> items({required ICategoryViewModel category}) {

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:shadowrun_6e_player_helper/view/features/items/item_category_widget.dart';
+import 'package:shadowrun_6e_player_helper/view/features/show_items/item_category_widget.dart';
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemPage extends StatefulWidget {
