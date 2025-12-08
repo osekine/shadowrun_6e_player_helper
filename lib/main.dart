@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/di/injection.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+import 'package:shadowrun_6e_player_helper/view/features/items/add_item_page.dart';
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 import 'view/features/items/item_page.dart';
@@ -20,6 +21,8 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   bool isLightTheme = true;
+  final lightTheme = ThemeData.light().copyWith(extensions: [lightAppTheme]);
+  final darkTheme = ThemeData.dark().copyWith(extensions: [darkAppTheme]);
 
   void _toggleTheme() {
     isLightTheme = !isLightTheme;
@@ -29,15 +32,34 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: isLightTheme
-          ? ThemeData.light().copyWith(extensions: [lightAppTheme])
-          : ThemeData.dark().copyWith(extensions: [darkAppTheme]),
+      theme: isLightTheme ? lightTheme : darkTheme,
       home: Builder(
         builder: (context) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: context.appTheme.background,
+              actionsPadding: EdgeInsets.fromLTRB(0, 16, 8, 0),
+              actions: [
+                IconButton(
+                  onPressed: _toggleTheme,
+                  icon: Icon(
+                    isLightTheme ? Icons.dark_mode : Icons.light_mode,
+                    color: context.appTheme.textMuted,
+                  ),
+                ),
+              ],
+            ),
             backgroundColor: context.appTheme.background,
             body: ItemPage(factory: getIt.getAsync<IEquipmentViewModel>),
-            floatingActionButton: FloatingActionButton(onPressed: _toggleTheme),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: context.appTheme.backgroundLight,
+              onPressed: () => AddItemPage.showAsBottomSheet(context),
+              child: Icon(
+                Icons.add,
+                size: 36,
+                color: context.appTheme.textMuted,
+              ),
+            ),
           );
         },
       ),

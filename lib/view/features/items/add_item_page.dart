@@ -10,10 +10,10 @@ class AddItemPage extends StatefulWidget {
   State<AddItemPage> createState() => _AddItemPageState();
 
   static Future<void> showAsBottomSheet(
-    BuildContext context,
+    BuildContext context, [
     ICategoryViewModel? category,
-  ) => showModalBottomSheet(
-    backgroundColor: context.appTheme.background,
+  ]) => showModalBottomSheet(
+    backgroundColor: context.appTheme.backgroundLight,
     context: context,
     builder: (_) => AddItemPage(category: category),
   );
