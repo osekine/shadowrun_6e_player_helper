@@ -94,4 +94,23 @@ class ItemRepository implements IItemRepository {
         },
       )
       .toList();
+
+  @override
+  Future<Item?> getItemFrom({
+    required String itemName,
+    required String table,
+  }) async {
+    final database = _database;
+    if (database == null) return null;
+
+    final json = await database.query(table, where: 'name = $itemName');
+    final preparedJson = _prepareJson(
+      json,
+      Category.values.firstWhere(
+        (cat) => cat.name == table.substring(0, table.length - 1),
+      ),
+    );
+
+    return Item.fromJson(preparedJson.first);
+  }
 }

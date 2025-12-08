@@ -7,6 +7,7 @@ part of 'item.dart';
 // **************************************************************************
 
 _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
+  id: (json['id'] as num?)?.toInt() ?? null,
   name: json['name'] as String,
   category: $enumDecode(_$CategoryEnumMap, json['category']),
   properties: Map<String, String?>.from(json['properties'] as Map),
@@ -18,6 +19,7 @@ _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
 );
 
 Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{
+  'id': instance.id,
   'name': instance.name,
   'category': _$CategoryEnumMap[instance.category]!,
   'properties': instance.properties,

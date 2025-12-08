@@ -4,4 +4,5 @@ abstract interface class IItemRepository {
   String get databaseId;
   Future<List<Item>> getItemsByCategory(Category category);
   Future<List<Item>> getAllItems();
+  Future<Item?> getItemFrom({required String itemName, required String table});
 }

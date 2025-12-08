@@ -9,8 +9,12 @@ import 'dart:async' as _i687;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shadowrun_6e_player_helper_data/features/equipment/i_item_repository.dart'
     as _i1072;
+import 'package:shadowrun_6e_player_helper_data/features/equipment/i_player_repository.dart'
+    as _i807;
 import 'package:shadowrun_6e_player_helper_data/features/equipment/item_repository.dart'
     as _i428;
+import 'package:shadowrun_6e_player_helper_data/features/equipment/player_repository.dart'
+    as _i1056;
 import 'package:shadowrun_6e_player_helper_data/service/data_service.dart'
     as _i387;
 import 'package:shadowrun_6e_player_helper_data/service/i_data_service.dart'
@@ -24,5 +28,9 @@ class Shadowrun6ePlayerHelperDataPackageModule
     gh.factory<_i352.IDataService>(() => _i387.DataService()..init());
     gh.factory<_i1072.IItemRepository>(
         () => _i428.ItemRepository(dataService: gh<_i352.IDataService>()));
+    gh.factory<_i807.IPlayerRepository>(() => _i1056.PlayerRepository(
+          dataService: gh<_i352.IDataService>(),
+          itemRepository: gh<_i1072.IItemRepository>(),
+        )..init());
   }
 }

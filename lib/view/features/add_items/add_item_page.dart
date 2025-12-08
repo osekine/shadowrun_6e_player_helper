@@ -15,10 +15,10 @@ class AddItemPage extends StatefulWidget {
   @override
   State<AddItemPage> createState() => _AddItemPageState();
 
-  static Future<void> showAsBottomSheet(
+  static Future<IItemViewModel?> showAsBottomSheet(
     BuildContext context, {
     ICategoryViewModel? category,
-  }) => showModalBottomSheet(
+  }) => showModalBottomSheet<IItemViewModel?>(
     backgroundColor: context.appTheme.backgroundLight,
     context: context,
     builder: (_) => AddItemPage(category: category),
@@ -27,7 +27,7 @@ class AddItemPage extends StatefulWidget {
 
 class _AddItemPageState extends State<AddItemPage> {
   late final PageController _controller;
-  final _vmNotifier = ValueNotifier<IEquipmentViewModel?>(null);
+  final _vmNotifier = ValueNotifier<IAllItemsViewModel?>(null);
   final _itemsNotifier = ValueNotifier<List<IItemViewModel>?>(null);
 
   @override
@@ -36,7 +36,7 @@ class _AddItemPageState extends State<AddItemPage> {
     final initCategory = widget.category;
     unawaited(
       Future(() async {
-        _vmNotifier.value = await getIt.getAsync<IEquipmentViewModel>();
+        _vmNotifier.value = await getIt.getAsync<IAllItemsViewModel>();
         if (initCategory != null) {
           _chooseCategory(initCategory, navigate: false);
         }

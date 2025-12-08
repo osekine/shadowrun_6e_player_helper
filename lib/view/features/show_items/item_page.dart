@@ -5,7 +5,7 @@ import 'package:shadowrun_6e_player_helper/view/features/show_items/item_categor
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemPage extends StatefulWidget {
-  final Future<IEquipmentViewModel> Function() factory;
+  final Future<IAllItemsViewModel> Function() factory;
   const ItemPage({super.key, required this.factory});
 
   @override
@@ -13,7 +13,7 @@ class ItemPage extends StatefulWidget {
 }
 
 class _ItemPageState extends State<ItemPage> {
-  final vmNotifier = ValueNotifier<IEquipmentViewModel?>(null);
+  final vmNotifier = ValueNotifier<IAllItemsViewModel?>(null);
 
   @override
   void initState() {

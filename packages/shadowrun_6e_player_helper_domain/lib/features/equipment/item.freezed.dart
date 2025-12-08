@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Item {
 
- String get name; Category get category; Map<String, String?> get properties; List<Attachment> get attachments;
+ int? get id; String get name; Category get category; Map<String, String?> get properties; List<Attachment> get attachments;
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ItemCopyWith<Item> get copyWith => _$ItemCopyWithImpl<Item>(this as Item, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.name, name) || other.name == name)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.properties, properties)&&const DeepCollectionEquality().equals(other.attachments, attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.properties, properties)&&const DeepCollectionEquality().equals(other.attachments, attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,category,const DeepCollectionEquality().hash(properties),const DeepCollectionEquality().hash(attachments));
+int get hashCode => Object.hash(runtimeType,id,name,category,const DeepCollectionEquality().hash(properties),const DeepCollectionEquality().hash(attachments));
 
 @override
 String toString() {
-  return 'Item(name: $name, category: $category, properties: $properties, attachments: $attachments)';
+  return 'Item(id: $id, name: $name, category: $category, properties: $properties, attachments: $attachments)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ItemCopyWith<$Res>  {
   factory $ItemCopyWith(Item value, $Res Function(Item) _then) = _$ItemCopyWithImpl;
 @useResult
 $Res call({
- String name, Category category, Map<String, String?> properties, List<Attachment> attachments
+ int? id, String name, Category category, Map<String, String?> properties, List<Attachment> attachments
 });
 
 
@@ -65,9 +65,10 @@ class _$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? category = null,Object? properties = null,Object? attachments = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = null,Object? category = null,Object? properties = null,Object? attachments = null,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category,properties: null == properties ? _self.properties : properties // ignore: cast_nullable_to_non_nullable
 as Map<String, String?>,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
+return $default(_that.id,_that.name,_that.category,_that.properties,_that.attachments);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)  $default,) {final _that = this;
 switch (_that) {
 case _Item():
-return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
+return $default(_that.id,_that.name,_that.category,_that.properties,_that.attachments);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String name,  Category category,  Map<String, String?> properties,  List<Attachment> attachments)?  $default,) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.name,_that.category,_that.properties,_that.attachments);case _:
+return $default(_that.id,_that.name,_that.category,_that.properties,_that.attachments);case _:
   return null;
 
 }
@@ -212,9 +213,10 @@ return $default(_that.name,_that.category,_that.properties,_that.attachments);ca
 @JsonSerializable()
 
 class _Item implements Item {
-  const _Item({required this.name, required this.category, required final  Map<String, String?> properties, final  List<Attachment> attachments = const []}): _properties = properties,_attachments = attachments;
+  const _Item({this.id = null, required this.name, required this.category, required final  Map<String, String?> properties, final  List<Attachment> attachments = const []}): _properties = properties,_attachments = attachments;
   factory _Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 
+@override@JsonKey() final  int? id;
 @override final  String name;
 @override final  Category category;
  final  Map<String, String?> _properties;
@@ -245,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.name, name) || other.name == name)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._properties, _properties)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._properties, _properties)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,category,const DeepCollectionEquality().hash(_properties),const DeepCollectionEquality().hash(_attachments));
+int get hashCode => Object.hash(runtimeType,id,name,category,const DeepCollectionEquality().hash(_properties),const DeepCollectionEquality().hash(_attachments));
 
 @override
 String toString() {
-  return 'Item(name: $name, category: $category, properties: $properties, attachments: $attachments)';
+  return 'Item(id: $id, name: $name, category: $category, properties: $properties, attachments: $attachments)';
 }
 
 
@@ -265,7 +267,7 @@ abstract mixin class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   factory _$ItemCopyWith(_Item value, $Res Function(_Item) _then) = __$ItemCopyWithImpl;
 @override @useResult
 $Res call({
- String name, Category category, Map<String, String?> properties, List<Attachment> attachments
+ int? id, String name, Category category, Map<String, String?> properties, List<Attachment> attachments
 });
 
 
@@ -282,9 +284,10 @@ class __$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? category = null,Object? properties = null,Object? attachments = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = null,Object? category = null,Object? properties = null,Object? attachments = null,}) {
   return _then(_Item(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category,properties: null == properties ? _self._properties : properties // ignore: cast_nullable_to_non_nullable
 as Map<String, String?>,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable

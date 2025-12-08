@@ -50,10 +50,13 @@ class _MainAppState extends State<MainApp> {
               ],
             ),
             backgroundColor: context.appTheme.background,
-            body: ItemPage(factory: getIt.getAsync<IEquipmentViewModel>),
+            body: ItemPage(factory: getIt.getAsync<IAllItemsViewModel>),
             floatingActionButton: FloatingActionButton(
               backgroundColor: context.appTheme.backgroundLight,
-              onPressed: () => AddItemPage.showAsBottomSheet(context),
+              onPressed: () async {
+                final newItem = await AddItemPage.showAsBottomSheet(context);
+                return;
+              },
               child: Icon(
                 Icons.add,
                 size: 36,

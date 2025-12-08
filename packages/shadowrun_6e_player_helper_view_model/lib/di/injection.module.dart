@@ -10,9 +10,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shadowrun_6e_player_helper_data/data.dart' as _i608;
 import 'package:shadowrun_6e_player_helper_data/di/injection.module.dart'
     as _i260;
-import 'package:shadowrun_6e_player_helper_view_model/features/item/equipment_view_model.dart'
+import 'package:shadowrun_6e_player_helper_view_model/features/item/all_items_view_model.dart'
     as _i411;
-import 'package:shadowrun_6e_player_helper_view_model/features/item/i_equipment_view_model.dart'
+import 'package:shadowrun_6e_player_helper_view_model/features/item/i_all_items_view_model.dart'
     as _i303;
 
 class Shadowrun6ePlayerHelperViewModelPackageModule
@@ -21,9 +21,9 @@ class Shadowrun6ePlayerHelperViewModelPackageModule
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) async {
     await _i260.Shadowrun6ePlayerHelperDataPackageModule().init(gh);
-    gh.factoryAsync<_i303.IEquipmentViewModel>(() {
+    gh.factoryAsync<_i303.IAllItemsViewModel>(() {
       final i =
-          _i411.EquipmentViewModel(itemRepository: gh<_i608.IItemRepository>());
+          _i411.AllItemsViewModel(itemRepository: gh<_i608.IItemRepository>());
       return i.init().then((_) => i);
     });
   }

@@ -12,11 +12,30 @@ class DataService implements IDataService {
   String? databasePath;
 
   @postConstruct
-  void init() {
-  }
+  void init() {}
 
   @override
-  Future<void> createDatabase() async {}
+  Future<Database> createDatabase({
+    required String name,
+    List<String> schemes = const [],
+  }) async {
+    databasePath ??= await getDatabasesPath();
+
+    name = '$name.db';
+    final path = '$databasePath/$name';
+
+    final db = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        for (final scheme in schemes) {
+          await db.execute(scheme);
+        }
+      },
+    );
+
+    return db;
+  }
 
   @override
   Future<void> deleteDatabase(String name) async {}
@@ -27,7 +46,7 @@ class DataService implements IDataService {
 
     name = '$name.db';
     // final path = '$databasePath/$name';
-    final path = '$databasePath/shadowrun.db';
+    final path = '$databasePath/$name';
     final exists = await databaseExists(path);
 
     if (!exists) {
