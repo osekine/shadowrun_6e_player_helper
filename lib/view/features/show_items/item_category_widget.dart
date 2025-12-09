@@ -1,17 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
-import 'package:shadowrun_6e_player_helper/view/features/add_items/add_item_page.dart';
 import 'package:shadowrun_6e_player_helper/view/features/show_items/item_carousel.dart';
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemCategoryWidget extends StatefulWidget {
   final ICategoryViewModel category;
   final ValueListenable<List<IItemViewModel>> items;
+  final void Function(ICategoryViewModel? cat) onAddTap;
   const ItemCategoryWidget({
     super.key,
     required this.category,
     required this.items,
+    required this.onAddTap,
   });
 
   @override
@@ -45,12 +46,7 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
                   style: context.appTheme.header.copyWith(letterSpacing: 0.4),
                 ),
                 InkWell(
-                  onTap: () {
-                    AddItemPage.showAsBottomSheet(
-                      context,
-                      category: widget.category,
-                    );
-                  },
+                  onTap: () => widget.onAddTap(widget.category),
                   child: Icon(
                     Icons.add,
                     color: context.appTheme.textMuted,

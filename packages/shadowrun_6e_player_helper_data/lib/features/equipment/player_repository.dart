@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:injectable/injectable.dart';
 import 'package:shadowrun_6e_player_helper_data/features/equipment/i_item_repository.dart';
 import 'package:shadowrun_6e_player_helper_data/features/equipment/i_player_repository.dart';
@@ -7,7 +8,7 @@ import 'package:shadowrun_6e_player_helper_data/service/i_data_service.dart';
 import 'package:shadowrun_6e_player_helper_domain/domain.dart';
 import 'package:sqflite/sqflite.dart';
 
-@Injectable(as: IPlayerRepository)
+@Singleton(as: IPlayerRepository)
 class PlayerRepository implements IPlayerRepository {
   final IDataService _dataService;
   final IItemRepository _itemRepository;
@@ -28,9 +29,37 @@ class PlayerRepository implements IPlayerRepository {
   }
 
   @override
-  Future<void> addItem() {
-    // TODO: implement addItem
-    throw UnimplementedError();
+  Future<void> addItem(Item item) async {
+    late final String table;
+    switch (item.category) {
+      case Category.weapon:
+        table = _weaponTable;
+        break;
+      case Category.armor:
+        table = _armorTable;
+        break;
+      case Category.electronics:
+        throw UnimplementedError();
+      case Category.consumables:
+        throw UnimplementedError();
+      case Category.augmentations:
+        throw UnimplementedError();
+      case Category.magic:
+        throw UnimplementedError();
+      case Category.vehicle:
+        throw UnimplementedError();
+      case Category.drone:
+        throw UnimplementedError();
+    }
+
+    final db = _playerDb;
+    if (db == null) return;
+
+    await db.insert(table, {
+      '${table}_id': item.name,
+      'accessories': [for (final accessory in item.attachments) accessory.name],
+    });
+    debugPrint('SUCCESS SAVE');
   }
 
   @override
@@ -60,26 +89,35 @@ CREATE TABLE $_armorTable (
 )''',
       ],
     );
+  }
+
+  @override
+  Future<void> load() async {
+    if (_playerDb == null) await _initDatabase();
 
     final weapons = await _getAllFromTable(_weaponTable);
+    debugPrint('$weapons');
     final armor = await _getAllFromTable(_armorTable);
 
+    // TODO(NLU): need remake
     for (final row in weapons) {
       final newWeapon = await _itemRepository.getItemFrom(
         itemName: '${row['weapon_id']}',
         table: 'weapons',
       );
       if (newWeapon != null) {
+        _items.putIfAbsent(Category.weapon, () => {});
         _items[Category.weapon]!['${row['id']}'] = newWeapon;
       }
     }
     for (final row in armor) {
-      final newWeapon = await _itemRepository.getItemFrom(
+      final newArmor = await _itemRepository.getItemFrom(
         itemName: '${row['armor_id']}',
         table: 'armors',
       );
-      if (newWeapon != null) {
-        _items[Category.armor]!['${row['id']}'] = newWeapon;
+      if (newArmor != null) {
+        _items.putIfAbsent(Category.armor, () => {});
+        _items[Category.armor]!['${row['id']}'] = newArmor;
       }
     }
   }

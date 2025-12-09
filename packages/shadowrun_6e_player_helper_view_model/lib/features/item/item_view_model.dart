@@ -18,6 +18,9 @@ class ItemViewModel implements IItemViewModel {
 
   @override
   late final ICategoryViewModel category;
+
+  @override
+  Item toItem() => _item;
 }
 
 // const _testProperties = {

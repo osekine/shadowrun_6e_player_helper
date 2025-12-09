@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shadowrun_6e_player_helper_data/data.dart';
+import 'package:shadowrun_6e_player_helper_view_model/common/loading_state.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/category_view_model.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_category_view_model.dart';
 import 'package:shadowrun_6e_player_helper_view_model/features/item/i_equipment_view_model.dart';
@@ -19,6 +22,12 @@ class EquipmentViewModel implements IEquipmentViewModel {
 
   @postConstruct
   void init() {
+    unawaited(_load());
+  }
+
+  Future<void> _load() async {
+    loadingState.value = LoadingState.loading;
+    await _repository.load();
     final categories = _repository.activeCategories;
     for (final cat in categories) {
       final categoryVm = CategoryViewModel(category: cat);
@@ -29,7 +38,14 @@ class EquipmentViewModel implements IEquipmentViewModel {
           .map((i) => ItemViewModel(item: i))
           .toList();
     }
+
+    loadingState.value = LoadingState.done;
   }
+
+  @override
+  final ValueNotifier<LoadingState> loadingState = ValueNotifier(
+    LoadingState.initializing,
+  );
 
   @override
   void addItem(IItemViewModel newItem) {
@@ -39,6 +55,7 @@ class EquipmentViewModel implements IEquipmentViewModel {
       ..._allItems[newItem.category]!.value,
       newItem,
     ];
+    unawaited(_repository.addItem(newItem.toItem()));
   }
 
   @override

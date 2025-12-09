@@ -26,9 +26,9 @@ class Shadowrun6ePlayerHelperDataPackageModule
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i352.IDataService>(() => _i387.DataService()..init());
-    gh.factory<_i1072.IItemRepository>(
+    gh.singleton<_i1072.IItemRepository>(
         () => _i428.ItemRepository(dataService: gh<_i352.IDataService>()));
-    gh.factory<_i807.IPlayerRepository>(() => _i1056.PlayerRepository(
+    gh.singleton<_i807.IPlayerRepository>(() => _i1056.PlayerRepository(
           dataService: gh<_i352.IDataService>(),
           itemRepository: gh<_i1072.IItemRepository>(),
         )..init());

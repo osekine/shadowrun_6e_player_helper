@@ -10,7 +10,7 @@ import 'package:sqflite/sqflite.dart';
 
 import 'i_item_repository.dart';
 
-@Injectable(as: IItemRepository)
+@Singleton(as: IItemRepository)
 class ItemRepository implements IItemRepository {
   Database? _database;
   final IDataService _dataService;
@@ -100,10 +100,11 @@ class ItemRepository implements IItemRepository {
     required String itemName,
     required String table,
   }) async {
+    await _initDatabase();
     final database = _database;
     if (database == null) return null;
 
-    final json = await database.query(table, where: 'name = $itemName');
+    final json = await database.query(table, where: 'name = "$itemName"');
     final preparedJson = _prepareJson(
       json,
       Category.values.firstWhere(
@@ -111,6 +112,9 @@ class ItemRepository implements IItemRepository {
       ),
     );
 
-    return Item.fromJson(preparedJson.first);
+    final itemJson = preparedJson.firstOrNull;
+    if (itemJson == null) return null;
+
+    return Item.fromJson(itemJson);
   }
 }

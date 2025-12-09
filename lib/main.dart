@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/di/injection.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
-import 'package:shadowrun_6e_player_helper/view/features/add_items/add_item_page.dart';
-import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 import 'view/features/show_items/item_page.dart';
 
@@ -37,7 +35,9 @@ class _MainAppState extends State<MainApp> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
+              surfaceTintColor: context.appTheme.background,
               backgroundColor: context.appTheme.background,
+              shadowColor: context.appTheme.border,
               actionsPadding: EdgeInsets.fromLTRB(0, 16, 8, 0),
               actions: [
                 IconButton(
