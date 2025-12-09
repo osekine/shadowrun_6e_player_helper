@@ -1,46 +1,64 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:shadowrun_6e_player_helper/di/injection.dart';
+import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
+import 'package:shadowrun_6e_player_helper/view/features/add_items/add_item_page.dart';
 import 'package:shadowrun_6e_player_helper/view/features/show_items/item_category_widget.dart';
 import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemPage extends StatefulWidget {
-  final Future<IAllItemsViewModel> Function() factory;
-  const ItemPage({super.key, required this.factory});
+  const ItemPage({super.key});
 
   @override
   State<ItemPage> createState() => _ItemPageState();
 }
 
 class _ItemPageState extends State<ItemPage> {
-  final vmNotifier = ValueNotifier<IAllItemsViewModel?>(null);
+  late final IEquipmentViewModel vm;
 
   @override
   void initState() {
     super.initState();
-    Future(() async => vmNotifier.value = await widget.factory.call());
+    vm = getIt.get<IEquipmentViewModel>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: vmNotifier,
-      builder: (context, vm, child) {
-        if (vm == null) return const CircularProgressIndicator();
-        return ListView.builder(
-          physics: ClampingScrollPhysics(),
-          addAutomaticKeepAlives: true,
-          itemBuilder: (_, index) {
-            final category = vm.categories[index];
-
-            return ItemCategoryWidget(
-              category: category,
-              items: vm.items(category: category),
-            );
-          },
-          itemCount: vm.categories.length,
-        );
-      },
+    return Scaffold(
+      backgroundColor: context.appTheme.background,
+      body: ValueListenableBuilder(
+        valueListenable: vm.categories,
+        builder: (context, categories, child) {
+          if (categories.isEmpty) return Center(child: Text('Тут пусто'));
+          final catList = categories.toList();
+          return ListView.builder(
+            physics: ClampingScrollPhysics(),
+            addAutomaticKeepAlives: true,
+            itemBuilder: (_, index) {
+              final category = catList[index];
+              return ItemCategoryWidget(
+                category: category,
+                items: vm.items(category: category),
+                onAddTap: () => _addItem(context),
+              );
+            },
+            itemCount: categories.length,
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: context.appTheme.backgroundLight,
+        onPressed: () async {
+          await _addItem(context);
+        },
+        child: Icon(Icons.add, size: 36, color: context.appTheme.textMuted),
+      ),
     );
+  }
+
+  Future<void> _addItem(BuildContext context, ) async {
+    final newItem = await AddItemPage.showAsBottomSheet(context);
+    if (newItem != null) {
+      vm.addItem(newItem);
+    }
   }
 }

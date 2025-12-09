@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadowrun_6e_player_helper/utils/app_themes.dart';
 import 'package:shadowrun_6e_player_helper/view/features/add_items/add_item_page.dart';
@@ -6,7 +7,7 @@ import 'package:shadowrun_6e_player_helper_view_model/view_model.dart';
 
 class ItemCategoryWidget extends StatefulWidget {
   final ICategoryViewModel category;
-  final List<IItemViewModel> items;
+  final ValueListenable<List<IItemViewModel>> items;
   const ItemCategoryWidget({
     super.key,
     required this.category,
@@ -60,7 +61,12 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
             ),
           ),
           const SizedBox(height: 4),
-          ItemCarousel(items: widget.items),
+          ValueListenableBuilder(
+            valueListenable: widget.items,
+            builder: (context, items, child) {
+              return ItemCarousel(items: items);
+            },
+          ),
           const SizedBox(height: 4),
         ],
       ),
