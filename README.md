@@ -7,8 +7,13 @@
 > Digital companion app for Shadowrun 6th Edition players to track inventory, equipment, and character stats
 
 <p align="center">
-  <img src="assets/screenshots/dark_mode.png" width="45%" />
-  <img src="assets/screenshots/light_mode.png" width="45%" />
+  <img src="assets/readme/dark_mode.png" width="45%" />
+  <img src="assets/readme/light_mode.png" width="45%" />
+</p>
+
+
+<p align="center">
+  <img src="assets/readme/showcase.gif" />
 </p>
 
 ## 🎯 The Problem
