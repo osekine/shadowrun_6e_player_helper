@@ -59,7 +59,24 @@ class EquipmentViewModel implements IEquipmentViewModel {
   }
 
   @override
-  void removeItem() {}
+  void removeItem(IItemViewModel removeItem, int index) {
+    final itemCategory = removeItem.category;
+    final itemList = _allItems[itemCategory]!.value;
+    itemList.removeAt(index);
+    _allItems[itemCategory]!.value = List.from(itemList);
+    if (_allItems[itemCategory]!.value.isEmpty) {
+      _categories.value = Set.from(_categories.value..remove(itemCategory));
+    }
+    unawaited(
+      Future(() async {
+        await _repository.removeItem(removeItem.toItem(), index);
+
+        for (final a in _allItems[itemCategory]?.value ?? []) {
+          await _repository.addItem(a.toItem());
+        }
+      }),
+    );
+  }
 
   @override
   ValueListenable<Set<ICategoryViewModel>> get categories => _categories;

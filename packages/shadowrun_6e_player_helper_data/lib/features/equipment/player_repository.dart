@@ -59,13 +59,36 @@ class PlayerRepository implements IPlayerRepository {
       '${table}_id': item.name,
       'accessories': [for (final accessory in item.attachments) accessory.name],
     });
-    debugPrint('SUCCESS SAVE');
   }
 
   @override
-  Future<void> removeItem() {
-    // TODO: implement removeItem
-    throw UnimplementedError();
+  Future<void> removeItem(Item item, int index) async {
+    late final String table;
+    switch (item.category) {
+      case Category.weapon:
+        table = _weaponTable;
+        break;
+      case Category.armor:
+        table = _armorTable;
+        break;
+      case Category.electronics:
+        throw UnimplementedError();
+      case Category.consumables:
+        throw UnimplementedError();
+      case Category.augmentations:
+        throw UnimplementedError();
+      case Category.magic:
+        throw UnimplementedError();
+      case Category.vehicle:
+        throw UnimplementedError();
+      case Category.drone:
+        throw UnimplementedError();
+    }
+
+    final db = _playerDb;
+    if (db == null) return;
+    final a = await db.query(table);
+    await db.delete(table);
   }
 
   @override
@@ -106,8 +129,9 @@ CREATE TABLE $_armorTable (
         table: 'weapons',
       );
       if (newWeapon != null) {
+        final item = newWeapon.copyWith(id: row['id'] as int);
         _items.putIfAbsent(Category.weapon, () => {});
-        _items[Category.weapon]!['${row['id']}'] = newWeapon;
+        _items[Category.weapon]!['${row['id']}'] = item;
       }
     }
     for (final row in armor) {
@@ -116,8 +140,9 @@ CREATE TABLE $_armorTable (
         table: 'armors',
       );
       if (newArmor != null) {
+        final item = newArmor.copyWith(id: row['id'] as int);
         _items.putIfAbsent(Category.armor, () => {});
-        _items[Category.armor]!['${row['id']}'] = newArmor;
+        _items[Category.armor]!['${row['id']}'] = item;
       }
     }
   }

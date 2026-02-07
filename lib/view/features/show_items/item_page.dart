@@ -47,6 +47,7 @@ class _ItemPageState extends State<ItemPage> {
                     category: category,
                     items: vm.items(category: category),
                     onAddTap: (cat) => _addItem(context, cat),
+                    onItemDelete: vm.removeItem,
                   );
                 },
                 itemCount: categories.length,

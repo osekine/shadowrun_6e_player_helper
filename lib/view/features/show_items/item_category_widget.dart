@@ -8,11 +8,13 @@ class ItemCategoryWidget extends StatefulWidget {
   final ICategoryViewModel category;
   final ValueListenable<List<IItemViewModel>> items;
   final void Function(ICategoryViewModel? cat) onAddTap;
+  final void Function(IItemViewModel, int) onItemDelete;
   const ItemCategoryWidget({
     super.key,
     required this.category,
     required this.items,
     required this.onAddTap,
+    required this.onItemDelete,
   });
 
   @override
@@ -60,7 +62,7 @@ class _ItemCategoryWidgetState extends State<ItemCategoryWidget>
           ValueListenableBuilder(
             valueListenable: widget.items,
             builder: (context, items, child) {
-              return ItemCarousel(items: items);
+              return ItemCarousel(items: items, onItemDelete: widget.onItemDelete,);
             },
           ),
           const SizedBox(height: 4),

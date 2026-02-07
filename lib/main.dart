@@ -39,7 +39,7 @@ class _MainAppState extends State<MainApp> {
               backgroundColor: context.appTheme.background,
               shadowColor: context.appTheme.border,
               actionsPadding: EdgeInsets.fromLTRB(0, 16, 8, 0),
-              actions: [
+              actions: [ 
                 IconButton(
                   onPressed: _toggleTheme,
                   icon: Icon(

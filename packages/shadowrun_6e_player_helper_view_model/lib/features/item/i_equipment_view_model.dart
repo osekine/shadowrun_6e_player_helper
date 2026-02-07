@@ -11,6 +11,6 @@ abstract interface class IEquipmentViewModel {
   });
   ValueListenable<LoadingState> get loadingState;
   void addItem(IItemViewModel newItem);
-  void removeItem();
+  void removeItem(IItemViewModel removeItem, int index);
   // void updateItem();
 }
