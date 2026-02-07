@@ -87,7 +87,7 @@ class PlayerRepository implements IPlayerRepository {
 
     final db = _playerDb;
     if (db == null) return;
-    final a = await db.query(table);
+    await db.query(table);
     await db.delete(table);
   }
 
